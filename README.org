@@ -8,3 +8,6 @@ GECO is used to map out the Leap's data into SuperCollider. Currently the softwa
 Download SC from here:http://supercollider.sourceforge.net/
 
 GECO can be found at LeapMotion's AppSpace.
+
+* TODO
+Make GECO <> SC communicate via OSC protocol.
