@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<geco version="1.1.0">
+  <leap>
+    <boundaries>
+      <lefthand minX="37.5" maxX="212.5" minY="100" maxY="400" minZ="0" maxZ="187.5"
+                minPitch="0" maxPitch="1.5707963705062866211" minRoll="0" maxRoll="3.1415927410125732422"
+                minYaw="0" maxYaw="1.5707963705062866211"/>
+      <righthand minX="25" maxX="200" minY="100" maxY="400" minZ="25" maxZ="187.5"
+                 minPitch="0" maxPitch="1.5707963705062866211" minRoll="0" maxRoll="3.1415927410125732422"
+                 minYaw="0" maxYaw="1.5707963705062866211"/>
+    </boundaries>
+    <colours positive="ff009fff" negative="ffa41111" disabled="ff555555"/>
+    <midi output="Null Device" decimation="0"/>
+    <osc hostname="" portnumber="0" enabled="0">
+      <paths>
+        <entry openness="16" dexterity="1" type="256" path="/left/open/present"/>
+        <entry openness="16" dexterity="2" type="256" path="/right/open/present"/>
+        <entry openness="32" dexterity="1" type="256" path="/left/closed/present"/>
+        <entry openness="32" dexterity="2" type="256" path="/right/closed/present"/>
+        <entry openness="16" dexterity="1" type="512" path="/left/open/posx"/>
+        <entry openness="16" dexterity="2" type="512" path="/right/open/posx"/>
+        <entry openness="32" dexterity="1" type="512" path="/left/closed/posx"/>
+        <entry openness="32" dexterity="2" type="512" path="/right/closed/posx"/>
+        <entry openness="16" dexterity="1" type="768" path="/left/open/posy"/>
+        <entry openness="16" dexterity="2" type="768" path="/right/open/posy"/>
+        <entry openness="32" dexterity="1" type="768" path="/left/closed/posy"/>
+        <entry openness="32" dexterity="2" type="768" path="/right/closed/posy"/>
+        <entry openness="16" dexterity="1" type="1024" path="/left/open/posz"/>
+        <entry openness="16" dexterity="2" type="1024" path="/right/open/posz"/>
+        <entry openness="32" dexterity="1" type="1024" path="/left/closed/posz"/>
+        <entry openness="32" dexterity="2" type="1024" path="/right/closed/posz"/>
+        <entry openness="16" dexterity="1" type="1280" path="/left/open/movx"/>
+        <entry openness="16" dexterity="2" type="1280" path="/right/open/movx"/>
+        <entry openness="32" dexterity="1" type="1280" path="/left/closed/movx"/>
+        <entry openness="32" dexterity="2" type="1280" path="/right/closed/movx"/>
+        <entry openness="16" dexterity="1" type="1536" path="/left/open/movy"/>
+        <entry openness="16" dexterity="2" type="1536" path="/right/open/movy"/>
+        <entry openness="32" dexterity="1" type="1536" path="/left/closed/movy"/>
+        <entry openness="32" dexterity="2" type="1536" path="/right/closed/movy"/>
+        <entry openness="16" dexterity="1" type="1792" path="/left/open/movz"/>
+        <entry openness="16" dexterity="2" type="1792" path="/right/open/movz"/>
+        <entry openness="32" dexterity="1" type="1792" path="/left/closed/movz"/>
+        <entry openness="32" dexterity="2" type="1792" path="/right/closed/movz"/>
+        <entry openness="16" dexterity="1" type="2048" path="/left/open/pitch"/>
+        <entry openness="16" dexterity="2" type="2048" path="/right/open/pitch"/>
+        <entry openness="32" dexterity="1" type="2048" path="/left/closed/pitch"/>
+        <entry openness="32" dexterity="2" type="2048" path="/right/closed/pitch"/>
+        <entry openness="16" dexterity="1" type="2304" path="/left/open/roll"/>
+        <entry openness="16" dexterity="2" type="2304" path="/right/open/roll"/>
+        <entry openness="32" dexterity="1" type="2304" path="/left/closed/roll"/>
+        <entry openness="32" dexterity="2" type="2304" path="/right/closed/roll"/>
+        <entry openness="16" dexterity="1" type="2560" path="/left/open/yaw"/>
+        <entry openness="16" dexterity="2" type="2560" path="/right/open/yaw"/>
+        <entry openness="32" dexterity="1" type="2560" path="/left/closed/yaw"/>
+        <entry openness="32" dexterity="2" type="2560" path="/right/closed/yaw"/>
+      </paths>
+    </osc>
+    <copperlan>
+      <assignments/>
+      <destinations/>
+    </copperlan>
+    <gestures>
+      <gesture openness="16" dexterity="1" type="256" midichannel="1" midicc="0"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="256" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="256" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="256" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="512" midichannel="1" midicc="1"
+               offset="0" rest="101" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="512" midichannel="1" midicc="2"
+               offset="0" rest="101" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="512" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="512" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="768" midichannel="1" midicc="3"
+               offset="0" rest="101" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="768" midichannel="1" midicc="5"
+               offset="0" rest="101" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="768" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="768" midichannel="1" midicc="4"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="1024" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="1024" midichannel="1" midicc="-1"
+               offset="0" rest="50" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="1024" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="1024" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="1280" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="1280" midichannel="1" midicc="9"
+               offset="0" rest="50" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="1280" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="1280" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="1536" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="1536" midichannel="1" midicc="8"
+               offset="0" rest="101" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="1536" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="1536" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="1792" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="1792" midichannel="1" midicc="-1"
+               offset="0" rest="25" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="1792" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="1792" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="2048" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="2048" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="2048" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="2048" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="2304" midichannel="1" midicc="-1"
+               offset="0" rest="101" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="2304" midichannel="1" midicc="-1"
+               offset="0" rest="58" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="2304" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="2304" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="1" type="2560" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="16" dexterity="2" type="2560" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="1" type="2560" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+      <gesture openness="32" dexterity="2" type="2560" midichannel="1" midicc="-1"
+               offset="0" rest="0" mute="0" solo="0" linked="0"/>
+    </gestures>
+  </leap>
+</geco>
