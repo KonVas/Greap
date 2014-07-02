@@ -1,8 +1,6 @@
 * Greap
 =====
 
-<2014-07-02 Wed>
-
 This is a repository to host the Greap, a project using the LeapMotion device.
 To use this you need to download a latest stable version of SuperCollider, and GECO.
 GECO is used to map out the Leap's data into SuperCollider. Currently the software is using MIDI protocol for that.
@@ -17,7 +15,6 @@ Gr(ain) + (L)eap = Greap. Greap is an interactive music environment made to crea
 
  Put the "dependancies" folder inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
 =======
-** To start using:
 * Download SC from here:http://supercollider.sourceforge.net/
 
 * GECO can be found at LeapMotion's AppSpace.
