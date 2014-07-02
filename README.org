@@ -17,4 +17,4 @@ Gr(ain) + (L)eap = Greap. Greap is an interactive music environment made to crea
 /recompile the class library/
 
 * TODO
-Make GECO <> SC communicate via OSC protocol.
+Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
