@@ -8,11 +8,11 @@ GECO is used to map out the Leap's data into SuperCollider. Currently the softwa
 Gr(ain) + (L)eap = Greap. Greap is an interactive music environment made to create live electroacoustic music. It started as a research project to investigate the gestural manipulation of sound events, and explore the affordances of open air interfaces. The idea was originally conceived by the need to shape sounds in real time using hands.
 
 *** Installation
--Download SC from here:http://supercollider.sourceforge.net/
+1.Download SC from here:http://supercollider.sourceforge.net/
 
--GECO can be found at LeapMotion's AppSpace.
+2.GECO can be found at LeapMotion's AppSpace.
 
--Put the "dependancies" folder inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
+3.Put the "dependancies" folder inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
 
 /recompile the class library/
 
