@@ -1,4 +1,4 @@
-s = Server.default;
+s = Server.default.reboot;
 
 s.waitForBoot({ {
 
@@ -349,18 +349,21 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 });
 
 
-MasterEQ(2, s);
+//MasterEQ(2, s);
 //MIDIFunc.trace(true)
 
 
 
 {
-"~/Dropbox/LeapCode/Leap Expressive Granulator [v1.0].geco".openOS;//path to the GECO file.
-5.wait;
-MIDIClient.init;
-0.3.wait;
-MIDIIn.connectAll;
 
+"~/Documents/Dev/Projects/Greap/resources/GECOMapSC.geco".openOS;//path to the GECO file.
+5.wait;
+
+MIDIClient.init;
+
+0.3.wait;
+
+MIDIIn.connectAll;
 
 }.fork(AppClock);
 
