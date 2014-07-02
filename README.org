@@ -12,5 +12,7 @@ Download SC from here:http://supercollider.sourceforge.net/
 
 GECO can be found at LeapMotion's AppSpace.
 
+Put the "dependancies" folder inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
+
 * TODO
 Make GECO <> SC communicate via OSC protocol.
