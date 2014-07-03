@@ -10,8 +10,8 @@ s.waitForBoot({ {
 	//p.postln.basename;
 	//	});
 
-	~sounds = BEERffers.loadDirectory("~/Dropbox/IonioSounds/");
-	~sounds.dict.keys;
+	~sounds = BEERffers.loadDirectory("~/Dropbox/Sounds/");
+	//	~sounds.dict.keys;
 
 /////////////////Mapping///////////////
 ~cc=([
@@ -42,7 +42,7 @@ Spec.add(\rate, [0.1, 4, \lin, 0.01, 1]);
 Spec.add(\rateDev, [0.0, 0.99, \lin, 0.01, 0.05]);
 Spec.add(\panMax, [0.0, 1, \lin, 0.005, 0.8]);
 Spec.add(\amp, [0.1, 0.8, \lin, 0.01, 0.25]);
-Spec.add(\bufnum, [0, ~sounds.size, \lin, 1]);
+Spec.add(\bufnum, [0, ~sounds.dict.size, \lin, 1]);
 Spec.add(\crossFade, [0, 10, \lin, 0.01, 10]);
 Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 
@@ -106,7 +106,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 	////////////////////////Slider Window///////////////////////////
 
 	{
-		w=Window.new("The Greap", Rect(10, 20, 980, 700)).front;//x,y,width,height
+		w=Window.new("Greap", Rect(10, 20, 980, 700)).front;//x,y,width,height
 		w.view.decorator=f=FlowLayout(w.view.bounds);
 		w.alwaysOnTop_(true); w.background = Color.black.alpha = 0.6;
 
@@ -118,14 +118,15 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 				{sl[par]=EZSmoothSlider(w.view, 300@35, par, cs[par], {|ez| x.set(par, ez.value)}, val)
 					.round_(0.01)
 					.setColors(Color.grey(0.3), Color.grey(0.7), Color.grey(alpha:0.5))
-					.font_(Font("Menlo", 12));
+					.font_(Font("Monaco", 11));
 				}.defer;
 			});
 		});
 
 		w.front;
 		w.refresh;
-		w.onClose_({ f.free; x.free; ~midiControl.free; ~changePreset.free; ~changeSound.free; ~startStopTdef.free; ~mappingTdef.free; ~sounds.free; ~freq.free; Tdef.removeAll;});
+		w.onClose_({ f.free; x.free; ~midiControl.free; ~changePreset.free; ~changeSound.free; ~startStopTdef.free; ~mappingTdef.free; ~sounds.free; ~freq.free;
+ });
 
 	}.defer;
 	{
@@ -219,49 +220,15 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 					sl[\trigRateDev].value_(trigRateDev).doAction; /* sl[\bufnum].value_(bufnum).doAction;*/ sl[\crossFade].value_(crossFade).doAction;
 			});
 
-			~presetMenu.setColors(Color.grey,Color.white).font_(Font("Menlo", 16, bold:true));
+			~presetMenu.setColors(Color.grey,Color.white).font_(Font("Monaco", 14, bold:true));
 
 		}.defer;
 	);
 
-
-	/////////random routine for samples & mapping//////////
-	Tdef(\sound, {
-		var time, bufnum, crossFade, rate, pat;
-		pat = Pxrand((0..~sounds.size -1), inf).asStream; //mind -1
-		loop{
-			time = 1 + rrand(1, 10);
-			bufnum = pat.next;
-			crossFade = rrand(0.1, 10).round(0.3);
-			rate = exprand(0.5, 2.0);
-			time.wait;
-			//x.set(\bufnum, bufnum, \crossFade, crossFade, \rate, rate);
-			sl[\rate].value_(rate).doAction;
-			sl[\bufnum].value_(bufnum).doAction;
-			sl[\crossFade].value_(crossFade).doAction;
-			{~textField.valueAction_("Sound: " ++ ~sounds[bufnum].basename)}.defer;
-		};
-	});
-
-
-	Tdef(\mapping, {
-		var time, pat;
-		 pat = Pxrand((0..~presetMenu.items.size -1), inf).asStream;
-		loop{
-			time = 1 + rrand(2, 20);
-			time.wait;
-			{~presetMenu.valueAction_(pat.next)}.defer;// AS ITEMS SIZE
-			{~textField.valueAction_( "Mapping: " ++ ~presetMenu.item.asString)
-			.stringColor_(Color.rand(0.0, 1.0))}.defer;
-		};
-	});
-
-
 	(
 
 		TextView(w.asView, Rect(20,10, 450, 250))
-		.focus(true)
-		.open("~/Dropbox/leapScore/score.txt")
+		.open("~/Documents/Dev/Projects/Greap/GECOScript/score.txt")
 		.hasVerticalScroller_(false)
 		.autohidesScrollers_(true);
 	);
@@ -273,16 +240,6 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 	]).action_({|state| if(state.value==1){x.run(true)}; if(state.value==0){x.run(false)} });
 
 
-	TdefAllGui(2, w);
-
-	//The mapping as Text view
-	(
-		~textField = TextField(w.asView, Rect(1, 1, 1270, 60))
-		.align_(\center)
-		.font_(Font("Menlo", size:36, bold:true, italic:true))
-		.background_(Color.grey);
-	);
-
 	~midiControl = MIDIFunc.cc({|val, num|
 		//[val, num].postln;
 		if(~cc.at(~i)[num]!=nil, {
@@ -290,14 +247,6 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 		});
 	}, ~mapper);
 
-
-	/*~changePreset = MIDIFunc.cc({|val, num|
-		if(num == 23){{~presetMenu.valueAction_(0)}.defer};
-		if(num == 24){{~presetMenu.valueAction_(1)}.defer};
-		if(num == 25){{~presetMenu.valueAction_(2)}.defer};
-		if(num == 26){{~presetMenu.valueAction_(3)}.defer};
-		if(num == 27){{~presetMenu.valueAction_(4)}.defer};
-	},(23..28) );*/
 
 	~changePreset = MIDIFunc.program({|val, num|
 		~presetPointer = ~presetPointer + 1 % ~presetMenu.items.size;
@@ -308,7 +257,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 	~changeSound = MIDIFunc.cc({|val, num|
 		if(num == 17){
 			if(val == 127){
-				var bufnum = Pxrand((0..~sounds.size -1), inf).asStream.next;
+				var bufnum = Pxrand((0..~sounds.dict.size -1), inf).asStream.next;
 				{
 					sl[\bufnum].value_(bufnum).doAction;
 					~textField.valueAction_("Sound Manually changed to : " ++ ~sounds[bufnum].basename)
@@ -317,31 +266,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 		};
 	}, ccNum:17);
 
-	~startStopTdef = MIDIFunc.cc({|val, num|
-		if(num == 45 ){
-			if(val == 127 ){ Tdef(\sound).play; };
-		};
-		if (num == 46){
-			if(val == 127 ){ Tdef(\sound).stop; };
-		};
-	}, ccNum:(45..46) );//play & stop button of nanoKorg.
-
-	~mappingTdef = MIDIFunc.cc({|val, num|
-		if(num == 47 ){
-			if(val == 127 ){ Tdef(\mapping).play(quant:1) };
-		};
-		if (num == 49){
-			if(val == 127 ){ Tdef(\mapping).stop; };
-		};
-	}, ccNum:[47, 49]);
-
-
 	//MIDIFunc.trace(false);
-
-	/*MIDIFunc.cc({|...args|
-	if(args[0] == 127){ ~i = ~i + 1 % cc.size; };
-	if(args[0] == 127){ x.set(\envbuf, q.bufs.coll.at(~env = ~env + 1 % q.bufs.coll.size).bufnum) };
-	}, ccNum:49);*/ //reloop button of nanoKorg.*/
 
 
 	}.fork(AppClock);
@@ -349,14 +274,14 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 });
 
 
-//MasterEQ(2, s);
+MasterEQ(2, s);
 //MIDIFunc.trace(true)
 
 
 
 {
 
-"~/Documents/Dev/Projects/Greap/resources/GECOMapSC.geco".openOS;//path to the GECO file.
+"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;//path to the GECO file.
 5.wait;
 
 MIDIClient.init;
