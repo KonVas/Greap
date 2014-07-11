@@ -41,7 +41,7 @@ Spec.add(\granDurDev, [0.0, 0.95, \lin, 0.01, 0]);
 Spec.add(\rate, [0.1, 4, \lin, 0.01, 1]);
 Spec.add(\rateDev, [0.0, 0.99, \lin, 0.01, 0.05]);
 Spec.add(\panMax, [0.0, 1, \lin, 0.005, 0.8]);
-Spec.add(\amp, [0.1, 0.8, \lin, 0.01, 0.25]);
+Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
 Spec.add(\bufnum, [0, ~sounds.dict.size, \lin, 1]);
 Spec.add(\crossFade, [0, 10, \lin, 0.01, 10]);
 Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
@@ -90,7 +90,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 						, pan
 						, -1
 						, 512
-						, Amplitude.kr( Median.kr(31, amp), 0.6, 0.6)
+						, Amplitude.kr( Median.kr(31, amp  ), 0.6, 0.6)
 					)//end of GrainBuf.
 				}, bufnum, crossFade)
 			) * EnvGen.ar(Env.adsr(0.3), gate)
@@ -248,13 +248,15 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 	}, ~mapper);
 
 
-	~changePreset = MIDIFunc.program({|val, num|
+	~changePreset = MIDIFunc.cc({|val, num|
 		~presetPointer = ~presetPointer + 1 % ~presetMenu.items.size;
 		/*"...".postln;*/
-		{~presetMenu.valueAction_(~presetPointer)}.defer;
-	});
+		if( val == 127 ){
+			{~presetMenu.valueAction_(~presetPointer)}.defer;
+		}
+	}, ccNum:64);
 
-	~changeSound = MIDIFunc.cc({|val, num|
+	/*	~changeSound = MIDIFunc.cc({|val, num|
 		if(num == 17){
 			if(val == 127){
 				var bufnum = Pxrand((0..~sounds.dict.size -1), inf).asStream.next;
@@ -265,6 +267,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 			};
 		};
 	}, ccNum:17);
+	*/
 
 	//MIDIFunc.trace(false);
 
@@ -274,6 +277,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 });
 
 
+
 MasterEQ(2, s);
 //MIDIFunc.trace(true)
 
@@ -281,14 +285,14 @@ MasterEQ(2, s);
 
 {
 
-"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;//path to the GECO file.
-5.wait;
+	"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;//path to the GECO file.
+	5.wait;
 
-MIDIClient.init;
+	MIDIClient.init;
 
-0.3.wait;
+	0.3.wait;
 
-MIDIIn.connectAll;
+	MIDIIn.connectAll;
 
 }.fork(AppClock);
 
