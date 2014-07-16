@@ -1,16 +1,13 @@
 s = Server.default.reboot;
 
+MIDIIn.connectAll;
+
 s.waitForBoot({ {
 
 	var cs, x, w, cc, o, r, g, q, sl=();
-	~i=0; ~mapper = (0..10); ~bufferPointer=0; ~presetPointer=0;
+	~i=0; ~mapper = (0..10);
 
-	//~sounds = "~/Dropbox/Sounds/*.aiff".pathMatch.collect ({ |p|
-	//Buffer.readChannel(s, p, channels: 0);
-	//p.postln.basename;
-	//	});
-
-	~sounds = BEERffers.loadDirectory("~/Dropbox/Sounds/");
+	~sounds = Buffer.read(s, Platform.resourceDir +/+ "sounds/a11wlk01.wav");
 	//	~sounds.dict.keys;
 
 /////////////////Mapping///////////////
@@ -18,7 +15,7 @@ s.waitForBoot({ {
 	(0:\gate, 1:\posLo, 2:\posHi, 3:\posDev, /*9:\pan,*/ 9:\panMax, 7:\amp), //scroller left/right only
 
 	(0:\gate, 3:\rateDev, 2:\posRateE, 1:\posLo, /*9:\pan,*/ 9:\panMax, 7:\amp), //bending 3=up/down of left hand
-
+	
 	(0:\gate, 2:\trigRate, 4:\granDur, 1:\posDev, 9:\panMax, 7:\amp), //stretch left/right only
 
 	(0:\gate, 1:\rateDev, 2:\granDur, 5:\rate, 9:\panMax, 7:\amp), //bending_2 5=up/down of right hand
@@ -42,16 +39,14 @@ Spec.add(\rate, [0.1, 4, \lin, 0.01, 1]);
 Spec.add(\rateDev, [0.0, 0.99, \lin, 0.01, 0.05]);
 Spec.add(\panMax, [0.0, 1, \lin, 0.005, 0.8]);
 Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
-Spec.add(\bufnum, [0, ~sounds.dict.size, \lin, 1]);
-Spec.add(\crossFade, [0, 10, \lin, 0.01, 10]);
-Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
+
 
 
 	cs=(
 		posLo:\posLo.asSpec, posHi:\posHi.asSpec, rate:\rate.asSpec, amp:\amp.asSpec, posDev:\posDev.asSpec,
 		posRateE:\posRateE.asSpec, posRateM:\posRateM.asSpec, trigRate:\trigRate.asSpec,
 		trigRateDev:\trigRateDev.asSpec, trigRateOsc:\trigRateOsc.asSpec, granDur:\granDur.asSpec,
-		granDurDev:\granDurDev.asSpec, panMax:\panMax.asSpec, bufnum:\bufnum.asSpec, crossFade:\crossFade.asSpec, pan:\pan.asSpec
+		granDurDev:\granDurDev.asSpec, panMax:\panMax.asSpec
 	);
 
 
@@ -77,8 +72,6 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 
 		OffsetOut.ar(out,
 			Limiter.ar(
-				Subduct({
-					|bufnum|
 					GrainBuf.ar(2
 						, trig
 						, Lag.kr(granDur, 0.3) * (TRand.kr(-1, 1.0, trig) * Lag.kr(granDurDev) + 1)
@@ -92,7 +85,6 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 						, 512
 						, Amplitude.kr( Median.kr(31, amp  ), 0.6, 0.6)
 					)//end of GrainBuf.
-				}, bufnum, crossFade)
 			) * EnvGen.ar(Env.adsr(0.3), gate)
 		)
 
@@ -100,22 +92,22 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 
 
 	s.sync;
-	x=Synth(\Granular, [\granDur, 0.3, \posDev, 0.1, \crossFade,8, \bufnum, ~sounds[\isThatYou]]);
+	x=Synth(\Granular, [\granDur, 0.3, \posDev, 0.1, \crossFade,8, \bufnum, ~sounds ]);
 
 
 	////////////////////////Slider Window///////////////////////////
 
 	{
-		w=Window.new("Greap", Rect(10, 20, 980, 700)).front;//x,y,width,height
+		w=Window.new("Greap", Rect(10, 20, 980, 350)).front;//x,y,width,height
 		w.view.decorator=f=FlowLayout(w.view.bounds);
 		w.alwaysOnTop_(true); w.background = Color.black.alpha = 0.6;
 
 
 		[\posLo, \posHi, \posDev, \posRateE, \posRateM,
 			\rate, \granDur, \amp, \trigRate, \trigRateOsc, \trigRateDev,
-			\granDurDev, \rateDev, \panMax, \gate, \bufnum, \crossFade, \pan].do({|par|
+			\granDurDev, \rateDev, \panMax, \gate].do({|par|
 			x.get(par, {|val|
-				{sl[par]=EZSmoothSlider(w.view, 300@35, par, cs[par], {|ez| x.set(par, ez.value)}, val)
+				{sl[par]=EZSlider(w.view, 300@35, par, cs[par], {|ez| x.set(par, ez.value)}, val)
 					.round_(0.01)
 					.setColors(Color.grey(0.3), Color.grey(0.7), Color.grey(alpha:0.5))
 					.font_(Font("Monaco", 11));
@@ -125,8 +117,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 
 		w.front;
 		w.refresh;
-		w.onClose_({ f.free; x.free; ~midiControl.free; ~changePreset.free; ~changeSound.free; ~startStopTdef.free; ~mappingTdef.free; ~sounds.free; ~freq.free;
- });
+		w.onClose_({ f.free; x.free; ~midiControl.free; ~sounds.free; ~freq.free; });
 
 	}.defer;
 	{
@@ -142,9 +133,9 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 				1,{try{f.free};f={ReplaceOut.ar(0, RLPF.ar(In.ar(0,2),In.kr(0,1),0.2,0.3))}.play(addAction:\addToTail)},
 				2,{try{f.free};f={ReplaceOut.ar(0, RHPF.ar(In.ar(0,2),In.kr(0,1),0.2,0.3))}.play(addAction:\addToTail)},
 				3,{try{f.free};f={ReplaceOut.ar(0, BPF.ar(In.ar(0,2),In.kr(0,1),0.2,1.5))}.play(addAction:\addToTail)},
-				4,{try{f.free};f={ReplaceOut.ar(0,Resonz.ar(In.ar(0,2),In.kr(0,1),0.2,2))}.play(addAction:\addToTail)},
-				5,{try{f.free};f={ReplaceOut.ar(0,MoogFF.ar(In.ar(0,2),In.kr(0,1),1.5))}.play(addAction:\addToTail)},
-				6,{try{f.free};f={ReplaceOut.ar(0,GVerb.ar(In.ar(0,2)))}.play(addAction:\addToTail)},
+				4,{try{f.free};f={ReplaceOut.ar(0, Resonz.ar(In.ar(0,2),In.kr(0,1),0.2,2))}.play(addAction:\addToTail)},
+				5,{try{f.free};f={ReplaceOut.ar(0, MoogFF.ar(In.ar(0,2),In.kr(0,1),1.5))}.play(addAction:\addToTail)},
+				6,{try{f.free};f={ReplaceOut.ar(0, GVerb.ar(In.ar(0,2)))}.play(addAction:\addToTail)},
 			);
 		});
 
@@ -158,66 +149,65 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 
 			~presetMenu.addItem(\Scroller,
 				{
-					|a, rate=1.0, crossFade=8, rateDev=0.0, posLo=0.01, posHi=0.99, trigRate=100, posRateM=1, posRateE=0, granDur=0.3|
+					|a, rate=1.0, rateDev=0.0, posLo=0.01, posHi=0.99, trigRate=100, posRateM=1, posRateE=0, granDur=0.3|
 					~i=0;
-					x.set(\rate, rate, \crossFade, crossFade, \rateDev, rateDev, \bufnum, ~sounds[\isThatYou], \posLo, posLo, \posHi, posHi, \trigRate, trigRate,
+					x.set(\rate, rate, \rateDev, rateDev, \posLo, posLo, \posHi, posHi, \trigRate, trigRate,
 						\posRateM, posRateM, \posRateE, posRateE, \granDur, granDur
 					);
-					/*sl[\bufnum].value_(bufnum).doAction;*/ sl[\rateDev].value_(rateDev).doAction;
+					sl[\rateDev].value_(rateDev).doAction;
 					sl[\rate].value_(rate).doAction; sl[\posLo].value_(posLo).doAction; sl[\granDur].value_(granDur);
-					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction; sl[\crossFade].value_(crossFade).doAction;
+					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction;
 					sl[\posRateM].value_(posRateM).doAction; sl[\posRateE].value_(posRateE).doAction
 			});
 
 			~presetMenu.addItem(\Bending,
 				{
-					|a, rateDev=0.0, posLo=0.01, posHi=0.99, trigRate=150, crossFade=6, posRateM=0.1, posRateE=1|
+					|a, rateDev=0.0, posLo=0.01, posHi=0.99, trigRate=150, posRateM=0.1, posRateE=1|
 					~i=1;
-					x.set(\bufnum, ~sounds[\seaRoaring], \crossFade, crossFade, \posLo, posLo, \posHi, posHi, \trigRate, trigRate, \posRateE, posRateE, \posRateM, posRateM
+					x.set( \posLo, posLo, \posHi, posHi, \trigRate, trigRate, \posRateE, posRateE, \posRateM, posRateM
 					);
 					/*sl[\bufnum].value_(bufnum).doAction;*/ sl[\rateDev].value_(rateDev).doAction;
 					sl[\posLo].value_(posLo).doAction; sl[\posRateE].value_(posRateE).doAction;
 					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction;
-					sl[\posRateM].value_(posRateM).doAction; sl[\crossFade].value_(crossFade).doAction;
+					sl[\posRateM].value_(posRateM).doAction;
 			});
 
 			~presetMenu.addItem(\Stretch,
 				{|a, rateDev=0.1, rate=1.0, granDur=0.3, posLo=0.01,
-					posHi=0.99, posDev=0.12, trigRate=20, posRateM=0, posRateE=0, trigRateDev=0.1, crossFade=6|
+					posHi=0.99, posDev=0.12, trigRate=20, posRateM=0, posRateE=0, trigRateDev=0.1 |
 					~i=2;
-					x.set(\rate, rate,\bufnum, ~sounds[\bell], \crossFade, crossFade, \granDur, granDur, \rateDev, rateDev, \posLo, posLo, \posDev, posDev,
+					x.set(\rate, rate,  \granDur, granDur, \rateDev, rateDev, \posLo, posLo, \posDev, posDev,
 						\posHi, posHi, \trigRate, trigRate, \posRateM, posRateM, \trigRateDev, trigRateDev, \posRateE, posRateE
 					);
 					sl[\rate].value_(rate).doAction; sl[\rateDev].value_(rateDev).doAction; sl[\posRateE].value_(posRateE).doAction;
 					sl[\posDev].value_(posDev).doAction; sl[\granDur].value_(granDur).doAction;
 					sl[\posLo].value_(posLo).doAction; /*sl[\bufnum].value_(bufnum).doAction;*/
 					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction;
-					sl[\posRateM].value_(posRateM).doAction; sl[\trigRateDev].value_(trigRateDev).doAction; sl[\crossFade].value_(crossFade).doAction;
+					sl[\posRateM].value_(posRateM).doAction; sl[\trigRateDev].value_(trigRateDev).doAction;
 			});
 
 			~presetMenu.addItem(\Bending_2,
 				{
-					|a, posDev=0.01, pan=0.0, rateDev=0.0, crossFade=0.3, posLo=0.01, posHi=0.99, trigRate=200, posRateM=0.1, posRateE=1, granDur=0.3|
+					|a, posDev=0.01, pan=0.0, rateDev=0.0, posLo=0.01, posHi=0.99, trigRate=200, posRateM=0.1, posRateE=1, granDur=0.3|
 					~i=3;
-		x.set(\bufnum, ~sounds[\triangle], \posDev, posDev, \pan, pan, \granDur, granDur, \posLo, posLo, \posHi, posHi, \trigRate, trigRate,
-						\posRateE, posRateE, \posRateM, posRateM,\crossFade, crossFade);
+		x.set( \posDev, posDev, \pan, pan, \granDur, granDur, \posLo, posLo, \posHi, posHi, \trigRate, trigRate,
+						\posRateE, posRateE, \posRateM, posRateM);
 					/*sl[\bufnum].value_(bufnum).doAction;*/ sl[\rateDev].value_(rateDev).doAction;
 					sl[\posLo].value_(posLo).doAction; sl[\posRateE].value_(posRateE).doAction;
 					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction;
 					sl[\posRateM].value_(posRateM).doAction; sl[\granDur].value_(granDur).doAction;
-					sl[\crossFade].value_(crossFade).doAction; sl[\pan].value_(pan).doAction;
 					sl[\posDev].value_(posDev).doAction;
 			});
 
 			~presetMenu.addItem(\CloudyDev,
-				{|a,rate=1.0, posLo=0.01, granDur=0.03, crossFade=8, posHi=0.99, trigRate=180, trigRateDev=0.0, posRateE=4, panMax=0.5|
+				{|a,rate=1.0, posLo=0.01, granDur=0.03, posHi=0.99, trigRate=180, trigRateDev=0.0, posRateE=4, panMax=0.5|
 					~i=4;
-					x.set(\rate, rate, \panMax, panMax, \bufnum, ~sounds[\BasClar],\posLo, posLo, \posHi, posHi, \granDur, granDur,
-						\trigRate, trigRate,  \trigRateDev, trigRateDev, \posRateE, posRateE, \crossFade, crossFade
+					x.set(\rate, rate, \panMax, panMax, \bufnum, ~sounds, \posLo, posLo, \posHi, posHi, \granDur, granDur,
+						\trigRate, trigRate,  \trigRateDev, trigRateDev, \posRateE, posRateE
 					);
 					sl[\rate].value_(rate).doAction; sl[\posLo].value_(posLo).doAction; sl[\posRateE].value_(posRateE).doAction; sl[\panMax].value_(panMax).doAction;
 					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction; sl[\granDur].value_(granDur).doAction;
-					sl[\trigRateDev].value_(trigRateDev).doAction; /* sl[\bufnum].value_(bufnum).doAction;*/ sl[\crossFade].value_(crossFade).doAction;
+					sl[\trigRateDev].value_(trigRateDev).doAction; /* sl[\bufnum].value_(bufnum).doAction;*/
 			});
 
 			~presetMenu.setColors(Color.grey,Color.white).font_(Font("Monaco", 14, bold:true));
@@ -225,13 +215,6 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 		}.defer;
 	);
 
-	(
-
-		TextView(w.asView, Rect(20,10, 450, 250))
-		.open("~/Documents/Dev/Projects/Greap/GECOScript/score.txt")
-		.hasVerticalScroller_(false)
-		.autohidesScrollers_(true);
-	);
 
 	Button(w.view, 90@60)
 	.states_([
@@ -248,52 +231,7 @@ Spec.add(\pan, [0.999, -0.999, \lin, 0.01]);
 	}, ~mapper);
 
 
-	~changePreset = MIDIFunc.cc({|val, num|
-		~presetPointer = ~presetPointer + 1 % ~presetMenu.items.size;
-		/*"...".postln;*/
-		if( val == 127 ){
-			{~presetMenu.valueAction_(~presetPointer)}.defer;
-		}
-	}, ccNum:64);
-
-	/*	~changeSound = MIDIFunc.cc({|val, num|
-		if(num == 17){
-			if(val == 127){
-				var bufnum = Pxrand((0..~sounds.dict.size -1), inf).asStream.next;
-				{
-					sl[\bufnum].value_(bufnum).doAction;
-					~textField.valueAction_("Sound Manually changed to : " ++ ~sounds[bufnum].basename)
-				}.defer;
-			};
-		};
-	}, ccNum:17);
-	*/
-
-	//MIDIFunc.trace(false);
-
-
 	}.fork(AppClock);
 	//s.plotTree.window(w);
 });
-
-
-
-MasterEQ(2, s);
-//MIDIFunc.trace(true)
-
-
-
-{
-
-	"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;//path to the GECO file.
-	5.wait;
-
-	MIDIClient.init;
-
-	0.3.wait;
-
-	MIDIIn.connectAll;
-
-}.fork(AppClock);
-
 
