@@ -20,7 +20,7 @@ Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to cr
 *** Step by Step guide
 1) Go to /Greap/GECOScript folder and run the GECOMapSC.geco document. This should start GECO.
 2) Once you get GECO up and running, run the Greap.scd found in /Greap/GreapCode. This should start SuperCollider.
-**** follow the order as noted.
+****** follow the order as noted.
 
 * TODO
 *** To do list
