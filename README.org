@@ -18,9 +18,10 @@ Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to cr
   * restart or recompile SuperCollider
 
 *** Step by Step guide
-- Go to /Greap/GECOScript folder and run the GECOMapSC.geco document. This should start GECO.
-- Once you get GECO up and running, run the Greap.scd found in /Greap/GreapCode. This should start SuperCollider.
+1) Go to /Greap/GECOScript folder and run the GECOMapSC.geco document. This should start GECO.
+2) Once you get GECO up and running, run the Greap.scd found in /Greap/GreapCode. This should start SuperCollider.
 
 
 * TODO
-Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
+*** To do list
+1. Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
