@@ -1,11 +1,12 @@
 * Greap
 =====
 
-This is a repository to host the Greap, a project using the LeapMotion device.
-To use this you need to download a latest stable version of SuperCollider, and GECO.
+This is a repository to host Greap (vanilla), a project using the LeapMotion device.
+To use, you need to download a latest stable version of SuperCollider, and GECO.
 GECO is used to map out the Leap's data into SuperCollider. At the time of development of Greap GECO didn't support OSC, currently the software is using MIDI protocol.
 
-Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to create live electroacoustic music. It started as a research project to investigate the gestural manipulation of sound events, and explore the affordances of open air interfaces. The idea was originally conceived by the need to shape sounds in real time using hands.
+Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to create live electroacoustic music. It started as a research project to investigate the gestural manipulation of sound events, and explore the affordances of open air interfaces. The idea was originally conceived by the need to shape sounds using hands.
+
 
 *** Installation
 - Download SC from here:http://supercollider.sourceforge.net/
@@ -14,6 +15,11 @@ Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to cr
 
 - Put the "dependancies" folder inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
   * restart or recompile SuperCollider
+
+*** Step by Step run
+- Go to /Greap/GECOScript and open the GECOMapSC.geco document. This should start GECO.
+- Once you get GECO up and running, open the Greap.scd found in /Greap/GreapCode. This should start SuperCollider.
+
 
 * TODO
 Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
