@@ -14,7 +14,7 @@ Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to cr
 
 - GECO can be found at LeapMotion's AirSpace:https://airspace.leapmotion.com/
 
-- Put the "dependancies" folder inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
+- Put the "dependancies" folder (found on the zip folder you downloaded) and move it inside the "Extensions" folder of SuperCollider (create if it doesn't exist).
   * restart or recompile SuperCollider
 
 *** Step by Step guide
