@@ -1,9 +1,5 @@
 s = Server.default.reboot;
 
-//"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS; //path to the GECO file.
-
-MIDIIn.connectAll;
-
 s.waitForBoot({ {
 
 	var cs, x, w, cc, o, r, g, q, sl=();
