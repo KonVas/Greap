@@ -1,5 +1,7 @@
 s = Server.default.reboot;
 
+//"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS; //path to the GECO file.
+
 MIDIIn.connectAll;
 
 s.waitForBoot({ {
@@ -234,4 +236,10 @@ Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
 	}.fork(AppClock);
 	//s.plotTree.window(w);
 });
+
+/////some code to open GECO and connect MIDI automatically.
+
+"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;
+
+MIDIIn.connectAll;
 
