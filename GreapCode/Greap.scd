@@ -207,7 +207,7 @@ Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
 					sl[\posHi].value_(posHi).doAction; sl[\trigRate].value_(trigRate).doAction; sl[\granDur].value_(granDur).doAction;
 					sl[\trigRateDev].value_(trigRateDev).doAction; /* sl[\bufnum].value_(bufnum).doAction;*/
 			});
-
+∏
 			~presetMenu.setColors(Color.grey,Color.white).font_(Font("Monaco", 14, bold:true));
 
 		}.defer;
@@ -238,6 +238,7 @@ Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
 fork{
 "~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;
 5.0.wait; // wait for the amount of time that GECOMap.SC needs to start its midi ports
+MIDIClient.init;
 MIDIIn.connectAll;
 }
 
