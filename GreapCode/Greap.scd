@@ -13,7 +13,7 @@ s.waitForBoot({ {
 	(0:\gate, 1:\posLo, 2:\posHi, 3:\posDev, /*9:\pan,*/ 9:\panMax, 7:\amp), //scroller left/right only
 
 	(0:\gate, 3:\rateDev, 2:\posRateE, 1:\posLo, /*9:\pan,*/ 9:\panMax, 7:\amp), //bending 3=up/down of left hand
-	
+
 	(0:\gate, 2:\trigRate, 4:\granDur, 1:\posDev, 9:\panMax, 7:\amp), //stretch left/right only
 
 	(0:\gate, 1:\rateDev, 2:\granDur, 5:\rate, 9:\panMax, 7:\amp), //bending_2 5=up/down of right hand
@@ -235,7 +235,9 @@ Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
 
 /////some code to open GECO and connect MIDI automatically.
 
+fork{
 "~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;
-
+5.0.wait; // wait for the amount of time that GECOMap.SC needs to start its midi ports
 MIDIIn.connectAll;
+}
 
