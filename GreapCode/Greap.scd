@@ -237,7 +237,7 @@ Spec.add(\amp, [0.1, 1.0, \lin, 0.01, 0.25]);
 
 fork{
 "~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;
-5.0.wait; // wait for the amount of time that GECOMap.SC needs to start its midi ports
+8.0.wait; // wait for the amount of time that GECOMap.SC needs to start its midi ports
 MIDIClient.init;
 MIDIIn.connectAll;
 }
