@@ -240,6 +240,10 @@ fork{
 8.0.wait; // wait for the amount of time that GECOMap.SC needs to start its midi ports
 MIDIClient.init;
 MIDIIn.connectAll;
+	"~/Documents/Dev/Projects/Greap/GECOScript/GECOMapSC.geco".openOS;
+	8.0.wait; // wait for the amount of time that GECOMap.SC needs to start its midi ports
+	MIDIClient.init;
+	MIDIIn.connectAll;
 }
 
 ///Testing!!!!!!!!
