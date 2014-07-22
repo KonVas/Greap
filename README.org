@@ -14,8 +14,14 @@ Note: This is a basic version of Greap and  provides very basic feautures. Gradu
 - GECO can be found at LeapMotion's AirSpace:https://airspace.leapmotion.com/
 
 *** Run
+<<<<<<< HEAD
 - Open the Greap.scd with SuperCollider found in GreapCode folder, and execute the whole file.
 ******* The current version of Greap implements an automatic way to run GECO, see at the end of Greap.scd file.
+=======
+- Open Greap.scd file in SuperCollider and execute the whole file.
+**** This should open GECO and run the GECOMapper file automatically.
+
+>>>>>>> master
 * TODO
 *** To do list
 - Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
