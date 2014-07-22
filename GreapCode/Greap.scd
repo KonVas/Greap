@@ -241,5 +241,3 @@ fork{
 MIDIClient.init;
 MIDIIn.connectAll;
 }
-
-///Testing!!!!!!!!
