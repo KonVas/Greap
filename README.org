@@ -16,7 +16,7 @@ Note: This is a basic version of Greap and  provides very basic feautures. Gradu
 
 *** Run
 - Open Greap.scd file in SuperCollider and execute the whole file.
-****** This should open GECO and run the GECOMapper file automatically.
+******* This should open GECO and run the GECOMapper file automatically.
 
 * TODO
 *** To do list
