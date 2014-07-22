@@ -14,10 +14,9 @@ Note: This is a basic version of Greap and  provides very basic feautures. Gradu
 
 - GECO can be found at LeapMotion's AirSpace:https://airspace.leapmotion.com/
 
-*** Step by Step guide
-1) Go to /Greap/GECOScript folder and run the GECOMapSC.geco document. This should start GECO.
-2) Once you get GECO up and running, run the Greap.scd found in /Greap/GreapCode. This should start SuperCollider.
-****** follow the order as noted.
+*** Run
+- Open Greap.scd file in SuperCollider and execute the whole file.
+***** This should open GECO and run the GECOMapper file automatically.
 
 * TODO
 *** To do list
