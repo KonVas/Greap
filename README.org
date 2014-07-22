@@ -21,5 +21,5 @@ Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to cr
 
 * TODO
 *** To do list
-+ Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
-+ Support the dynamic alteration of the sound file during performing.
+- Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
+- Support the dynamic alteration of the sound file during performing.
