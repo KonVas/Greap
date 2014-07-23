@@ -15,7 +15,7 @@ Note: This is a basic version of Greap and  provides very basic feautures. Gradu
 
 *** Run
 - Open the Greap.scd with SuperCollider found in GreapCode folder, and execute the whole file.
-******* The current version of Greap implements an automatic way to run GECO, see at the end of Greap.scd file.
+**** The current version of Greap implements an automatic way to run GECO, see at the end of Greap.scd file.
 * TODO
 *** To do list
 - Make GECO <> SC communicate via OSC protocol (as of now GECO supports OSC).
