@@ -16,7 +16,7 @@ Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to cr
 
 *** Run
 - Open Greap.scd file in SuperCollider and execute the whole file.
-**** This should open GECO and run the GECOMapper file automatically.
+**** This should open GECO and run the GECOMapper file automatically (see at the end of the Greap.scd code).
 
 * TODO
 *** To do list
