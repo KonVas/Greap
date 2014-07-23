@@ -242,8 +242,4 @@ MIDIClient.init;
 MIDIIn.connectAll;
 }
 
-<<<<<<< HEAD
 //Wed Jul 23 11:49:09 EEST 2014
-=======
-//Testing Ver. Wed Jul 23 11:46:53 EEST 2014
->>>>>>> developer
