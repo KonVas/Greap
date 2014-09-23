@@ -8,7 +8,7 @@ GECO is used to map out the Leap's data into SuperCollider. At the time of devel
 Gr(ain) + (L)eap = Greap. /Greap/ is an interactive music environment made to create live electroacoustic music. It started as a research project to investigate the gestural manipulation of sound events, and explore the affordances of open air interfaces. The idea was originally conceived by the need to shape sounds using hands.
 
 Usage
-- Download SC from here:http://supercollider.sourceforge.net/
+- Download SuperCollider: http://supercollider.sourceforge.net/
 - GECO: https://airspace.leapmotion.com/
 
 Run
