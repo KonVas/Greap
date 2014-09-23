@@ -1,4 +1,4 @@
-* Greap
+Greap
 =====
 
 This is a repository to host Greap (vanilla), a project using the LeapMotion device.
