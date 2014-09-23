@@ -13,7 +13,7 @@ Usage
 - GECO: https://airspace.leapmotion.com/
 
 Run
-- Move Beerffers file to Extensions folder of SuperCollider found in Application Support folder.
+- Move Beerffers.sc to Extensions folder of SuperCollider found in Application Support folder.
 - Place any sound files (mono) you want to use at the folder inside GreapCode folder Greap/GreapCode/Sounds.
 - Open Greap.scd in SuperCollider and execute the whole file (this should open GECO and run the GECOMapper file automatically).
 
