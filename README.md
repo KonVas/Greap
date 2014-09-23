@@ -1,4 +1,4 @@
-Greap
+Greap 1.0v
 =====
 
 This is Greap, a project using the LeapMotion device to shape sounds in real time. To use, you need to download a latest stable version of SuperCollider, and GECO. GECO is used to map out the Leap's data into SuperCollider. At the time of development of Greap GECO didn't support OSC, currently the software is using MIDI protocol.
