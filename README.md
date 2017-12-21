@@ -6,7 +6,7 @@ Gr(ain) + (L)eap = Greap: is an interactive music environment made to create liv
 ## Greap in action
 Follow the link (https://vimeo.com/87510975) to see a piece that was composed with the environment.
 
-##Some additional Info
+## Some additional Info
 - Greap uses the idea of scenes. Within this functionality one can store mapping, control values and audio sample information to use. In this version 5 scenes are implemented, but one is free to develop its own.
 
 ## Usage
