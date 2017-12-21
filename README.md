@@ -4,6 +4,9 @@ Greap 1.0v
 This is Greap, a project using the LeapMotion device to shape sounds in real time. To use, you need to download a latest stable version of SuperCollider, and GECO. GECO is used to map out the Leap's data into SuperCollider. At the time of development of Greap GECO didn't support OSC, currently the software is using MIDI protocol.
 Gr(ain) + (L)eap = Greap: is an interactive music environment made to create live electroacoustic music. It started as a research project to investigate the gestural manipulation of sound events, and explore the affordances of open air interfaces. The idea was originally conceived by the need to shape sounds using hands.
 
+Greap in action
+To see the environment in action following this link: (https://vimeo.com/87510975).
+
 Some additional Info
 - Greap uses the idea of scenes. Within this functionality one can store mapping, control values and audio sample information to use. In this version 5 scenes are implemented, but one is free to develop its own.
 
